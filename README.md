@@ -1,13 +1,5 @@
 노드 js로 게시판 만들기
 
-***2020.04.09 - node-js 시작
-  + node js 설치
-    - index.js 로 Hello World! 출력
-
-  + ejs 설치
-    - url 지정후 호출
-    - 파라미터 전송 및 호출
-
 ***2020.04.10 - 주소록 만들기 (nodeJs - mongdb 연결)
   + ejs express mongdb package 설치
     - npm install --save ejs express mongoose
@@ -25,3 +17,21 @@
     - update과 destroy는 HTTP Methods 중 put과 delete을 사용하는데, 대부분의 브라우저의 form은 get과 post 만을 허용하고 나머지는 허용하지 않습니다. 
     - 브라우저에서 허용하진 않지만 나중에 API로 연결할 때는 문제가 없기 때문에 HTTP를 올바르게 사용하는 법을 익히는 것이 더 중요합니다. 
     - 지금은 일단 method override라는  package를 설치하여 이를 우회하도록하겠습니다.
+
+  + res.render() 
+    - 해당 ejs 파일로 페이지 그리기
+    
+  + mongo db update, select, delete, create
+   - post : create에 해당. Contact.create 구문으로 생성
+   - get : select에 해당. Contact.find 와 Contact.findOne으로 검색 첫번째 인자 ({}) 에 조건 값 지정 findOne은 하나의 값만 find는 전체를 검색
+   - put : update에 해당. Contact.findOneAndUpdate 구문으로 해당 검색 데이터의 값을 수정. 첫번째 인자({})로 검색 후 두번째 인자(req.body) 값으로 수정
+   - delete : deletedp 해당. Contact.deleteOne 구문으로  검색 첫번째 인자 ({}) 에 조건 값 지정 후 해당 데이터 삭제
+
+***2020.04.09 - node-js 시작
+  + node js 설치
+    - index.js 로 Hello World! 출력
+
+  + ejs 설치
+    - url 지정후 호출
+    - 파라미터 전송 및 호출
+
