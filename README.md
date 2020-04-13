@@ -1,4 +1,9 @@
 노드 js로 게시판 만들기
+***2020.04.13 - 기시판 만들기(프로젝트 생성)
+  + 프로젝트 생성
+    - npm init --yes
+    - npm install --save ejs express mongoose body-parser method-override
+    - views path가 잡히지않아 require('path'); 를 통해 app.set('views', path.join(__dirname, 'views')); 로 위치 지정
 
 ***2020.04.13 - 주소록 만들기(router & bootstrap 적용)
   + Router 적용
