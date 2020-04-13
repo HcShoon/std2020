@@ -17,6 +17,13 @@ router.get('/new', function(req, res){
   res.render('contacts/new');
 });
 
+// show
+router.get('/:id', function(req, res){
+    Contact.findOne({_id:req.params.id}, function(err, contact){
+      if(err) return res.json(err);
+      res.render('contacts/show', {contact:contact});
+    });
+  });
 // create
 router.post('/', function(req, res){
   Contact.create(req.body, function(err, contact){

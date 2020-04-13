@@ -1,5 +1,18 @@
 노드 js로 게시판 만들기
 
+***2020.04.13 - 주소록 만들기(router & bootstrap 적용)
+  + Router 적용
+    - 이전 index.js에서 app을 사용하여 분기하던것을 모듈로 분리하여 Router로 라우팅함
+    - router를 사용하는 이유 : 
+      1. 기본 경로 코드 분리 ex) 'contact/new' -> contact로 라우팅 모듈 생성 후 '/new' 로 지정
+      2. 콘솔에 요청을 기록하도록 미들웨어 라우팅
+      3. 매개변수가 있는 경로
+      4. 특정 매개 변수의 유효성을 검사하기 위해 매개 변수 용 미들웨어 라우팅
+      5. 특정 경로로 전달 된 매개 변수의 유효성을 검사합니다.
+      
+  + bootstrap 적용
+    - head.ejs에 bootstrap 관련 url 적용
+ 
 ***2020.04.10 - 주소록 만들기 (nodeJs - mongdb 연결)
   + ejs express mongdb package 설치
     - npm install --save ejs express mongoose
