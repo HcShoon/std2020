@@ -1,6 +1,6 @@
 // routes/contacts.js
 
-var express = require('express');
+var express = require('../node_modules/express');
 var router = express.Router();
 var Contact = require('../models/Contact'); // 1
 

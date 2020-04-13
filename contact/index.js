@@ -1,9 +1,9 @@
 // index.js
 
-var express = require('express');
+var express = require('./node_modules/express');
 var mongoose = require('mongoose');
-var bodyParser = require('body-parser'); // 1
-var methodOverride = require('method-override'); // 1
+var bodyParser = require('./node_modules/body-parser'); // 1
+var methodOverride = require('./node_modules/method-override'); // 1
 var app = express();
 
 // DB setting ...

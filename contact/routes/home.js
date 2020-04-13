@@ -1,6 +1,6 @@
 //routes/home.js
 
-var express = require('express');
+var express = require('../node_modules/express');
 var router = express.Router(); // 1 express.Router()를 사용해서 router함수를 초기화합니다.
 
 // Home
