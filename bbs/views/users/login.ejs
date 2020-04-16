@@ -1,0 +1,34 @@
+<!-- views/posts/new.ejs -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../partials/head') %>
+  </head>
+  <body>
+    <%- include('../partials/nav') %>
+
+    <div class="container mb-3">
+
+      <form action="/users/joinin" method="post">
+
+        <div class="form-group">
+          <label for="title">ID</label> 
+          <input type="text" id="userId" name="userId" value="" class="form-control">
+          
+        </div>
+        
+        <div class="form-group">
+            <label for="title">PASSWORD</label>
+            <input type="text" id="userPw" name="userPw" value="" class="form-control">
+        </div>
+        <div>
+          <a class="btn btn-primary" href="/users/joinup">jopinUp</a>
+          <button type="submit" class="btn btn-primary">join In</button>
+        </div>
+
+      </form>
+
+    </div>
+  </body>
+</html>
