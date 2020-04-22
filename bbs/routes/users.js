@@ -1,55 +1,76 @@
-// routes/posts.js
+// routes/users.js
 
-var express  = require('express');
+var express = require('express');
 var router = express.Router();
 var User = require('../models/User');
 
-// Index 
-// router.get('/:userId', function(req, res){
-//   Post.findOne({userId:req.params.userId}, req.body,function(err, posts){    
-//     if(err) return res.json(err);
-//     res.render('posts/index', {posts:posts});
-//   }
-//   );
-// });
-//login
-router.get('/', function(req,res){
-
-  res.render('users/login');
+// Index // 1
+router.get('/', function(req, res){
+  User.find({})
+    .sort({username:1})
+    .exec(function(err, users){
+      if(err) return res.json(err);
+      res.render('users/index', {users:users});
+    });
 });
 
-//create user
+// New
+router.get('/new', function(req, res){
+  res.render('users/new');
+});
+
+// create
 router.post('/', function(req, res){
   User.create(req.body, function(err, user){
     if(err) return res.json(err);
-    alert('회원가입 성공');
     res.redirect('/users');
   });
 });
 
-//signup
-router.get('/joinup', function(req, res){
-  res.render('users/joinup');
-});
-
-//sign in
-router.post('/joinin', function(req, res){
-  console.log(req.body)
-
-  User.findOne({userId:req.body.userId}, function(err, user){
+// show
+router.get('/:username', function(req, res){
+  User.findOne({username:req.params.username}, function(err, user){
     if(err) return res.json(err);
-    console.log('--------------------------------------------');
-    console.log(err);
-    console.log(user);
-    if(user.userPw != req.params.userPw){
-      alert('로그인 실패')
-    }else{
-      alert('로그인 성공')
-    }
-
-    res.render('/users', {});
+    res.render('users/show', {user:user});
   });
 });
 
+// edit
+router.get('/:username/edit', function(req, res){
+  User.findOne({username:req.params.username}, function(err, user){
+    if(err) return res.json(err);
+    res.render('users/edit', {user:user});
+  });
+});
+
+// update // 2
+router.put('/:username', function(req, res, next){
+  User.findOne({username:req.params.username}) // 2-1
+    .select('password') // 2-2
+    .exec(function(err, user){
+      if(err) return res.json(err);
+
+      // update user object
+      user.originalPassword = user.password;
+      user.password = req.body.newPassword? req.body.newPassword : user.password; // 2-3
+      for(var p in req.body){ // 2-4
+        user[p] = req.body[p];
+      }
+
+      // save updated user
+      user.save(function(err, user){
+        if(err) return res.json(err);
+        res.redirect('/users/'+user.username);
+      });
+  });
+});
+
+// destroy
+router.delete('/:username', function(req, res){
+  User.deleteOne({username:req.params.username}, function(err){
+    if(err) return res.json(err);
+    res.redirect('/users');
+  });
+});
 
 module.exports = router;
