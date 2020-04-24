@@ -1,4 +1,4 @@
-package com.shoon.std_spring;
+package com.shoon.bbs;
 
 import java.text.DateFormat;
 import java.util.Date;
