@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="boardMapper">
+      <!-- 게시판 글 작성 -->
+   <insert id="insert">
+	   INSERT INTO MP_BOARD(    BNO 
+	   					      , TITLE 
+	   					      , CONTENT 
+	   					      , WRITER  )
+	                 VALUES(    MP_BOARD_SEQ.NEXTVAL 
+	                 		  , #{title}
+	                 		  , #{content}
+	                 		  , #{writer}  )
+   
+   </insert>
+   
+   <select id="list" resultType="com.shoon.bbs.bbs.vo.BoardVO">
+		SELECT   BNO
+			   , TITLE
+			   , WRITER
+			   , REGDATE
+		  FROM MP_BOARD
+		  ORDER BY BNO DESC
+	</select>
+	
+	<select id="read" parameterType="int" resultType="com.shoon.bbs.bbs.vo.BoardVO">
+		SELECT	BNO
+			  , TITLE
+			  , CONTENT
+			  , WRITER
+			  , REGDATE
+		 FROM MP_BOARD
+		 WHERE BNO = #{bno}
+	</select>
+	
+	<update id="update" parameterType="com.shoon.bbs.bbs.vo.BoardVO">
+		UPDATE MP_BOARD
+		   SET TITLE    =   #{title},
+		   	   CONTENT  =   #{content}
+		 WHERE BNO = #{bno} 
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		DELETE 
+		  FROM MP_BOARD
+		 WHERE BNO = #{bno}
+	</delete>
+</mapper>

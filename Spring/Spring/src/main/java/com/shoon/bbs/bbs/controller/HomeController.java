@@ -1,4 +1,4 @@
-package com.shoon.bbs;
+package com.shoon.bbs.bbs.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
