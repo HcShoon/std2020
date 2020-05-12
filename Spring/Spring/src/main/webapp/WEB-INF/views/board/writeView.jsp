@@ -13,7 +13,7 @@
 			<hr />
 			 
 			<nav>
-			  홈 - 글 작성
+			  <%@include file="nav.jsp" %>
 			</nav>
 			<hr />
 			

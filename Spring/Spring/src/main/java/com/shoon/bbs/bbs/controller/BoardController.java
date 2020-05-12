@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.shoon.bbs.bbs.service.BoardService;
 import com.shoon.bbs.bbs.vo.BoardVO;
+import com.shoon.bbs.bbs.vo.Criteria;
+import com.shoon.bbs.bbs.vo.PageMaker;
 
 @Controller
 @RequestMapping("/board/*")
@@ -35,16 +37,22 @@ public class BoardController {
 			
 			service.write(boardVO);
 			
-			return "board/list";
+			return "redirect:list";
 		}
 		
 		// 게시판 목록 조회
 		@RequestMapping(value = "/list", method = RequestMethod.GET)
-		public String list(Model model) throws Exception{
+		public String list(Model model, Criteria cri) throws Exception{
 			logger.info("list");
+		
+			model.addAttribute("list",service.list(cri));
 			
-			model.addAttribute("list",service.list());
+			PageMaker pageMaker = new PageMaker();
+			pageMaker.setCri(cri);
+			pageMaker.setTotalCount(service.listCount());
 			
+			model.addAttribute("pageMaker", pageMaker);
+			System.out.println(service.listCount());
 			
 			return "board/list";
 			
@@ -77,9 +85,7 @@ public class BoardController {
 			
 			service.update(boardVO);
 			
-			model.addAttribute("update", service.read(boardVO.getBno()));
-			
-			return "board/list";
+			return "redirect:list";
 		}
 		
 		// 게시판 삭제
@@ -89,7 +95,7 @@ public class BoardController {
 			
 			service.delete(boardVO.getBno());
 			
-			return "board/list";
+			return "redirect:list";
 		}
 				
 				

@@ -4,6 +4,11 @@
 <html>
 	<head>
 	 	<title>게시판</title>
+	 	<script>
+	 	function fnDeleteBbs(){
+	 		location.href = "/board/delete?bno=" + ${read.bno};
+	 	}
+	 	</script>
 	</head>
 	<body>
 	
@@ -14,7 +19,7 @@
 			<hr />
 			 
 			<nav>
-			  홈 - 글 작성
+			  <%@include file="nav.jsp" %>
 			</nav>
 			<hr />
 			
@@ -49,6 +54,9 @@
 								</td>
 								<td>						
 									<button type="submit">수정하기</button>
+								</td>
+								<td>						
+									<input type="button" onclick="javascript:fnDeleteBbs();" value = '삭제하기'/>
 								</td>
 							</tr>
 									
