@@ -2,7 +2,10 @@
 
 var express = require('express');
 var router = express.Router();
-var User = require('../models/User');
+//var User = require('../models/User');
+var mysql      = require('mysql');
+var dbconfig   = require('../config/database.js');
+var conn       = mysql.createConnection(dbconfig);
 
 // Index // 1
 router.get('/', function(req, res){

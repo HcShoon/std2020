@@ -1,3 +1,10 @@
+
+***2020.05.21 - node js 회원 제 개발
+  + db 변경
+    - mongoDB 에서 Mysql로 변경
+    - npm install -save mysql
+  + 보드 게시물 리스트만 변경
+
 spring 로 게시판 만들기
 
 ***2020.04.23 - spring 복습을위해 갈아탐
