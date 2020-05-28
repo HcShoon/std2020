@@ -32,6 +32,16 @@ public class SonicController {
 				
 		return "home";
 	}
+	@RequestMapping(value = "/apiCall", method = RequestMethod.POST)
+	public String apiCall(Model model,@RequestParam String apiKey, @RequestParam String secretKey, @RequestParam String apiValue ) {
+				
+		model.addAttribute("apiKey", apiKey);
+		model.addAttribute("secretKey", secretKey);
+		model.addAttribute("apiVal", apiValue.toUpperCase());
+		
+		return apiValue;
+	}
+	
 	@RequestMapping(value = "/account", method = RequestMethod.GET, produces = "application/text; charset=utf8")
 	@ResponseBody
 	public String accountController(@RequestParam String apiKey, @RequestParam String endpoint,@RequestParam String secretKey) {
@@ -45,16 +55,46 @@ public class SonicController {
 		
 		return result;
 	}
-	@RequestMapping(value = "/balance", method = RequestMethod.GET, produces = "application/text; charset=utf8")
+
+	@RequestMapping(value = "/walletAdd", method = RequestMethod.GET, produces = "application/text; charset=utf8")
 	@ResponseBody
-	public String balanceController(@RequestParam String apiKey, @RequestParam String endpoint,@RequestParam String secretKey) {
+	public String walletAddController(@RequestParam String apiKey, @RequestParam String endpoint,@RequestParam String secretKey,@RequestParam String symbol) {
 		
 		Map<String, String> pramMap = new HashMap<String, String>();
 		
 		pramMap.put("apiKey", apiKey);
 		pramMap.put("secretKey", secretKey);
+		pramMap.put("endpoint", endpoint + "/" + symbol);
+		
+		String result = snService.walletAddService(pramMap);
+		
+		return result;
+	}
+	@RequestMapping(value = "/ticker", method = RequestMethod.GET, produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String tickerController(@RequestParam String apiKey, @RequestParam String endpoint, @RequestParam String symbol) {
+		
+		Map<String, String> pramMap = new HashMap<String, String>();
+		
+		pramMap.put("apiKey", apiKey);
+		pramMap.put("symbol", symbol);
 		pramMap.put("endpoint", endpoint);
-		String result = snService.balanceService(pramMap);
+		
+		String result = snService.tickerService(pramMap);
+		
+		return result;
+	}
+	@RequestMapping(value = "/orderBook", method = RequestMethod.GET, produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String orderBookController(@RequestParam String apiKey, @RequestParam String endpoint, @RequestParam String symbol) {
+		
+		Map<String, String> pramMap = new HashMap<String, String>();
+		
+		pramMap.put("apiKey", apiKey);
+		pramMap.put("symbol", symbol);
+		pramMap.put("endpoint", endpoint);
+		
+		String result = snService.orderBookService(pramMap);
 		
 		return result;
 	}
